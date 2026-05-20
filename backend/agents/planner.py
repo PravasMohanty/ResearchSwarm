@@ -31,5 +31,6 @@ class PlannerAgent(BaseAgent):
         prompt = PlannerPrompt(task.description)
 
         response = await llm_manager.generate(prompt)
+        parsed_response = parser.parse_planner_output(response)
 
-        return response
+        return parsed_response

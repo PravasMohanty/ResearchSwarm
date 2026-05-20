@@ -1,6 +1,10 @@
 from agents.base_agent import BaseAgent
 from schemas.tasks import Task
 from schemas.events import EventType
+from tools.llm import llm_manager
+from tools.search import search_manager
+from tools.scraper import scraper
+from utils.parser import parser
 
 class ResearcherAgent(BaseAgent):
 
@@ -60,11 +64,7 @@ Source:
 
         findings = await llm_manager.generate(prompt)
 
-        return {
+        parsed_findings = parser.parse_research_output(findings)
 
-            "task_id": task.task_id,
-            "agent_id": self.agent_id,
-            "findings": findings,
-            "sources": sources
-        }
+        return parsed_findings
 

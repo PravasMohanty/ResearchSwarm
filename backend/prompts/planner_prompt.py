@@ -29,12 +29,16 @@ RULES:
 
 7. Do NOT return explanations.
 
-8. Return ONLY a valid Python list of dictionaries.
-
-9. Every subtask dictionary MUST contain:
+8. Every subtask dictionary MUST contain:
 - title
 - type
 - description
+
+9. Return ONLY a valid JSON array of objects.
+
+10. Do NOT wrap output inside ```json blocks.
+
+11. Do NOT include comments or trailing commas.
 
 OUTPUT FORMAT EXAMPLE:
 
@@ -50,6 +54,10 @@ OUTPUT FORMAT EXAMPLE:
         "description": "Analyze pricing differences across major AI providers."
     }}
 ]
+
+IMPORTANT:
+- Return ONLY raw JSON
+- Output must be directly parsable using Python json.loads()
 
 NOW GENERATE THE SUBTASKS.
 """

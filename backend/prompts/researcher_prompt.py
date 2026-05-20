@@ -43,7 +43,7 @@ RULES:
 
 OUTPUT FORMAT:
 
-{
+{{
     "summary": "...",
 
     "key_findings": [
@@ -65,9 +65,13 @@ OUTPUT FORMAT:
         "...",
         "..."
     ]
-}
+}}
 
-Return ONLY valid JSON.
+IMPORTANT:
+- Return ONLY raw JSON
+- Do NOT use markdown
+- Do NOT wrap output inside ```json
+- Output must be directly parsable using Python json.loads()
 """
 
     return prompt
