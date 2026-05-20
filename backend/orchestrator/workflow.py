@@ -1,5 +1,5 @@
 import uuid
-from agents.planner_agent import PlannerAgent
+from agents.planner import PlannerAgent
 from schemas.tasks import Task, TaskStatus
 
 
