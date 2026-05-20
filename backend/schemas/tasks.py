@@ -10,7 +10,7 @@ class TaskStatus(str, Enum):
     FAILED = "failed"
     WAITING = "waiting"
 
-class ResearchTask(BaseModel):
+class Task(BaseModel):
     task_id: str
     session_id: str
     title: str
