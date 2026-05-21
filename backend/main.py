@@ -12,14 +12,19 @@ async def main():
         "completed_tasks": [],
         "current_task": None,
         "sources": [],
-        "final_report": {}
+        "final_report": {},
+        "session_id": ""
     }
+
+    logger.info("ResearchSwarm execution started")
 
     result = await graph.ainvoke(
         initial_state
     )
 
     report = result["final_report"]
+
+    logger.info("ResearchSwarm execution completed")
 
     print("\n========== FINAL REPORT ==========\n")
     print(f"Title: {report.get('title', 'N/A')}\n")

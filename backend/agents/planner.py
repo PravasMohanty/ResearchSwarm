@@ -4,6 +4,7 @@ from schemas.events import EventType
 from tools.llm import llm_manager
 from prompts.planner_prompt import planner_prompt
 from utils.parser import parser
+from utils.logger import logger
 
 class PlannerAgent(BaseAgent):
 
@@ -19,7 +20,7 @@ class PlannerAgent(BaseAgent):
         self,
         task: Task
     ):
-
+        logger.info(f"Planner started for objective: {task.description}")
         await self.emit_event(
 
             session_id=task.session_id,
@@ -33,5 +34,7 @@ class PlannerAgent(BaseAgent):
 
         response = await llm_manager.generate(prompt)
         parsed_response = parser.parse_planner_output(response)
+
+        logger.info(f"Planner generated {len(parsed_response)} subtasks")
 
         return parsed_response

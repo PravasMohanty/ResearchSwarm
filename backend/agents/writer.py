@@ -4,7 +4,7 @@ from schemas.events import EventType
 from prompts.writer_prompt import writer_prompt
 from tools.llm import llm_manager
 from utils.parser import parser
-
+from utils.logger import logger
 
 class WriterAgent(BaseAgent):
 
@@ -21,6 +21,8 @@ class WriterAgent(BaseAgent):
         analyzed_findings: dict
     ):
 
+        logger.info(f"Writing started for task: {task.title}")
+
         await self.emit_event(
             session_id=task.session_id,
             event_type=EventType.THINKING,
@@ -36,5 +38,7 @@ class WriterAgent(BaseAgent):
 
         response = await llm_manager.generate(prompt)
         parsed_response = parser.parse_research_output(response)
+
+        logger.info(f"Writing completed for task: {task.title}")
 
         return parsed_response

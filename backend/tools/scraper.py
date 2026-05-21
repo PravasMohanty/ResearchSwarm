@@ -1,6 +1,6 @@
 import httpx
 from bs4 import BeautifulSoup
-
+from utils.logger import logger
 
 class Scraper:
 
@@ -10,7 +10,7 @@ class Scraper:
     ):
 
         try:
-
+            logger.info(f"Scraping webpage: {url}")
             async with httpx.AsyncClient() as client:
                 response = await client.get(
                     url,
@@ -44,6 +44,8 @@ class Scraper:
             }
 
         except Exception as e:
+            
+            logger.error(f"Scraping failed for {url}: {e}")
 
             return {
 

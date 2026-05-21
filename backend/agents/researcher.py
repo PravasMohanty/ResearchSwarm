@@ -6,6 +6,7 @@ from tools.search import search_manager
 from tools.scraper import scraper
 from utils.parser import parser
 from prompts.researcher_prompt import researcher_prompt
+from utils.logger import logger
 
 class ResearcherAgent(BaseAgent):
 
@@ -20,6 +21,8 @@ class ResearcherAgent(BaseAgent):
         self,
         task : Task
     ):
+        logger.info(f"Research started for task: {task.title}")
+
         await self.emit_event(
             session_id=task.session_id,
             event_type=EventType.THINKING,
@@ -27,6 +30,7 @@ class ResearcherAgent(BaseAgent):
                 "message": f"Researching on task: {task.title}"
             }
         )
+        logger.info(f"Research started for task: {task.title}")
 
         search_results = await search_manager.search(
 
@@ -62,9 +66,13 @@ Source:
             context=scraped_context
         )
 
+        logger.info(f"Retrieved {len(search_results)} search results")
+
         findings = await llm_manager.generate(prompt)
 
         parsed_findings = parser.parse_research_output(findings)
+
+        logger.info(f"Research completed for task: {task.title}")
 
         return parsed_findings
 

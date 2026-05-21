@@ -1,10 +1,10 @@
 import uuid
-
+import asyncio
 from langgraph.graph import StateGraph, START, END
 
 from schemas.state import AgentState
 from schemas.tasks import Task, TaskStatus
-
+from utils.logger import logger
 from agents.planner import PlannerAgent
 from agents.researcher import ResearcherAgent
 from agents.analyst import AnalystAgent
@@ -18,7 +18,7 @@ writer_agent = WriterAgent()
 
 
 async def planner_node(state: AgentState):
-
+    logger.info("Entering planner node")
     session_id = str(uuid.uuid4())
 
     root_task = Task(
@@ -35,41 +35,66 @@ async def planner_node(state: AgentState):
     )
 
     state["subtasks"] = subtasks
+    state["session_id"] = session_id
+
+    logger.info(f"Planner generated {len(subtasks)} subtasks")
 
     return state
 
 
 async def research_node(state: AgentState):
 
-    findings = []
+    research_coroutines = []
 
     for subtask in state["subtasks"]:
 
         task = Task(
             task_id=str(uuid.uuid4()),
-            session_id=str(uuid.uuid4()),
+            session_id=state["session_id"],
             title=subtask["title"],
             description=subtask["description"],
             status=TaskStatus.PENDING,
             priority=1
         )
 
-        result = await research_agent.execute(
+        coroutine = research_agent.execute(
             task
         )
 
-        findings.append(result)
+        research_coroutines.append(
+            coroutine
+        )
 
-    state["findings"] = findings
+    findings = await asyncio.gather(
+    *research_coroutines,
+    return_exceptions=True
+)
+
+    valid_findings = []
+
+for result in findings:
+
+    if isinstance(result, Exception):
+
+        logger.error(str(result))
+
+        continue
+
+    valid_findings.append(result)
+
+state["findings"] = valid_findings
+
+    logger.info(f"Research completed for {len(findings)} subtasks")
+
 
     return state
 
 
 async def analyst_node(state: AgentState):
-
+    logger.info("Entering analyst node")
     task = Task(
         task_id=str(uuid.uuid4()),
-        session_id=str(uuid.uuid4()),
+        session_id=state["session_id"],
         title="Analysis Task",
         description=state["objective"],
         status=TaskStatus.PENDING,
@@ -83,14 +108,16 @@ async def analyst_node(state: AgentState):
 
     state["analyzed_findings"] = analyzed_findings
 
+    logger.info("Analysis completed")
+
     return state
 
 
 async def writer_node(state: AgentState):
-
+    logger.info("Entering writer node")
     task = Task(
         task_id=str(uuid.uuid4()),
-        session_id=str(uuid.uuid4()),
+        session_id=state["session_id"],
         title="Writer Task",
         description=state["objective"],
         status=TaskStatus.PENDING,
@@ -103,6 +130,8 @@ async def writer_node(state: AgentState):
     )
 
     state["final_report"] = final_report
+
+    logger.info("Final report generated")
 
     return state
 
