@@ -16,7 +16,7 @@ class ResearcherAgent(BaseAgent):
             agent_id="researcher_1",
             role="researcher"
         )
-    
+
     async def execute(
         self,
         task : Task
@@ -58,7 +58,7 @@ Content:
 Source:
 {result['url']}
 
-""" 
+"""
             sources.append(result["url"])
 
         prompt = researcher_prompt(

@@ -1,6 +1,6 @@
 import asyncio
 from orchestrator.graph import graph
-
+from utils.logger import logger
 
 async def main():
 

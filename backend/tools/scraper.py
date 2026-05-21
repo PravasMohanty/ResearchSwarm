@@ -44,7 +44,7 @@ class Scraper:
             }
 
         except Exception as e:
-            
+
             logger.error(f"Scraping failed for {url}: {e}")
 
             return {
