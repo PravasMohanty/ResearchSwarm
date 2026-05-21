@@ -1,5 +1,4 @@
-import requests
-
+import httpx
 from bs4 import BeautifulSoup
 
 
@@ -12,13 +11,14 @@ class Scraper:
 
         try:
 
-            response = requests.get(
-                url,
-                timeout=10,
-                headers={
-                    "User-Agent": "Mozilla/5.0"
-                }
-            )
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    url,
+                    timeout=10,
+                    headers={
+                        "User-Agent": "Mozilla/5.0"
+                    }
+                )
 
             soup = BeautifulSoup(
                 response.text,

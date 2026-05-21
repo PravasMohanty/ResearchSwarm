@@ -7,7 +7,7 @@ class MessageType(str, Enum):
     TASK_ASSIGNMENT = "task_assignment"
     TASK_RESULT = "task_result"
     STATUS_UPDATE = "status_update"
-    REVISON_REQUEST = "revision_request"
+    REVISION_REQUEST = "revision_request"
     TOOL_CALL = "tool_call"
     THINKING = "thinking"
     ERROR = "error"

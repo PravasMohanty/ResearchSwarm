@@ -1,3 +1,5 @@
+import asyncio
+
 from tavily import TavilyClient
 from config.settings import settings
 
@@ -16,7 +18,8 @@ class SearchManager:
         max_results: int = 5
     ):
 
-        response = self.client.search(
+        response = await asyncio.to_thread(
+            self.client.search,
             query=query,
             max_results=max_results
         )

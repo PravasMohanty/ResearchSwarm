@@ -2,7 +2,8 @@ from agents.base_agent import BaseAgent
 from schemas.tasks import Task
 from schemas.events import EventType
 from tools.llm import llm_manager
-from prompts.planner_prompt import PlannerPrompt
+from prompts.planner_prompt import planner_prompt
+from utils.parser import parser
 
 class PlannerAgent(BaseAgent):
 
@@ -28,7 +29,7 @@ class PlannerAgent(BaseAgent):
             }
         )
 
-        prompt = PlannerPrompt(task.description)
+        prompt = planner_prompt(task.description)
 
         response = await llm_manager.generate(prompt)
         parsed_response = parser.parse_planner_output(response)

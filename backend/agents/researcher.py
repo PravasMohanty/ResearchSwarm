@@ -5,6 +5,7 @@ from tools.llm import llm_manager
 from tools.search import search_manager
 from tools.scraper import scraper
 from utils.parser import parser
+from prompts.researcher_prompt import researcher_prompt
 
 class ResearcherAgent(BaseAgent):
 
@@ -20,8 +21,7 @@ class ResearcherAgent(BaseAgent):
         task : Task
     ):
         await self.emit_event(
-            self,
-            session_id = Task.session_id,
+            session_id=task.session_id,
             event_type=EventType.THINKING,
             payload={
                 "message": f"Researching on task: {task.title}"
