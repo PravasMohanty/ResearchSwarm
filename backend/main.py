@@ -5,7 +5,7 @@ from utils.logger import logger
 async def main():
 
     initial_state = {
-        "objective": "Analyze the current AI coding assistant market including Cursor, Windsurf, Claude Code, and GitHub Copilot.",
+        "objective": "Which companies declared very good results in terms of profitability in the last quarter?",
         "subtasks": [],
         "findings": [],
         "analyzed_findings": {},
@@ -26,15 +26,39 @@ async def main():
 
     logger.info("ResearchSwarm execution completed")
 
-    print("\n========== FINAL REPORT ==========\n")
-    print(f"Title: {report.get('title', 'N/A')}\n")
-    print(f"Executive Summary:\n{report.get('executive_summary', 'N/A')}\n")
+    # =========================
+    # CREATE REPORT TEXT
+    # =========================
+    output = "\n========== FINAL REPORT ==========\n\n"
+
+    output += f"Title: {report.get('title', 'N/A')}\n\n"
+
+    output += (
+        f"Executive Summary:\n"
+        f"{report.get('executive_summary', 'N/A')}\n\n"
+    )
 
     for section in report.get("sections", []):
-        print(f"--- {section.get('title', 'Section')} ---")
-        print(f"{section.get('content', '')}\n")
+        output += f"--- {section.get('title', 'Section')} ---\n"
+        output += f"{section.get('content', '')}\n\n"
 
-    print(f"Final Conclusion:\n{report.get('final_conclusion', 'N/A')}\n")
+    output += (
+        f"Final Conclusion:\n"
+        f"{report.get('final_conclusion', 'N/A')}\n"
+    )
+
+    # =========================
+    # PRINT TO TERMINAL
+    # =========================
+    print(output)
+
+    # =========================
+    # SAVE TO TEXT FILE
+    # =========================
+    with open("results/final_report.txt", "w", encoding="utf-8") as f:
+        f.write(output)
+
+    print("Report saved to final_report.txt")
 
 
 if __name__ == "__main__":
