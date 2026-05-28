@@ -35,7 +35,7 @@ class ResearcherAgent(BaseAgent):
         search_results = await search_manager.search(
 
             query=task.description,
-            max_results=3
+            max_results=5
         )
 
         scraped_context = ""

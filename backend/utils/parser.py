@@ -47,7 +47,7 @@ class Parser:
 
         except Exception as e:
 
-            print(
+            logger.error(
                 f"[PARSER ERROR - PLANNER]: {e}"
             )
 
@@ -77,7 +77,7 @@ class Parser:
 
         except Exception as e:
 
-            print(
+            logger.error(
                 f"[PARSER ERROR - RESEARCH]: {e}"
             )
 

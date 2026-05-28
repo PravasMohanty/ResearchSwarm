@@ -40,7 +40,7 @@ class Scraper:
             return {
 
                 "url": url,
-                "content": text[:15000]
+                "content": text[:30000]
             }
 
         except Exception as e:

@@ -1,0 +1,442 @@
+.research-page {
+  align-items: flex-start;
+  padding-top: 6vh;
+}
+
+.research-container {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ===== Top bar ===== */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  pointer-events: none;
+  animation: fadeIn 0.5s var(--ease-out-expo) 0.3s both;
+}
+
+.top-bar > * {
+  pointer-events: auto;
+}
+
+/* ===== Hamburger button ===== */
+.hamburger-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.hamburger-btn:hover {
+  border-color: var(--glass-border-hover);
+  background: var(--bg-card-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(108, 92, 231, 0.1);
+}
+
+.hamburger-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.hamburger-btn:hover .hamburger-line {
+  background: var(--accent-secondary);
+}
+
+.hamburger-btn:hover .hamburger-line:nth-child(2) {
+  width: 14px;
+}
+
+/* ===== Logout button ===== */
+.logout-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.logout-btn:hover {
+  border-color: rgba(255, 107, 107, 0.3);
+  color: var(--danger);
+  background: rgba(255, 107, 107, 0.08);
+  transform: translateY(-1px);
+}
+
+/* ===== Header ===== */
+.research-header {
+  text-align: center;
+  animation: fadeInUp 0.7s var(--ease-out-expo) both;
+}
+
+.research-welcome {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.accent-dot {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.research-prompt {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: var(--text-secondary);
+  font-weight: 400;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ===== Query card ===== */
+.research-card {
+  padding: 2rem;
+}
+
+/* ===== Textarea ===== */
+.textarea-wrapper {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+.research-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  line-height: 1.6;
+  transition: border-color var(--transition-fast),
+              background var(--transition-fast),
+              box-shadow var(--transition-fast);
+  font-family: var(--font-body);
+}
+
+.research-textarea::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.research-textarea:focus {
+  border-color: var(--accent-primary);
+  background: rgba(108, 92, 231, 0.04);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.research-textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.textarea-counter {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 1rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* ===== Error card ===== */
+.error-card {
+  border-color: rgba(255, 107, 107, 0.2) !important;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.error-content svg {
+  flex-shrink: 0;
+}
+
+/* ===== Results section ===== */
+.results-section {
+  animation: fadeInUp 0.5s var(--ease-out-expo) both;
+}
+
+/* ===== History badge ===== */
+.history-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: var(--radius-sm);
+  background: rgba(108, 92, 231, 0.08);
+  border: 1px solid rgba(108, 92, 231, 0.15);
+  font-size: 0.78rem;
+  color: var(--accent-secondary);
+  font-weight: 500;
+  animation: fadeIn 0.4s var(--ease-out-expo) both;
+}
+
+.history-badge svg {
+  flex-shrink: 0;
+}
+
+.new-research-link {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+}
+
+.new-research-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-secondary);
+}
+
+/* ===== Result card ===== */
+.result-card {
+  padding: 2rem;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.2rem;
+}
+
+.result-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(81, 207, 102, 0.12);
+  border: 1px solid rgba(81, 207, 102, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+.result-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ===== Section labels ===== */
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.65rem;
+}
+
+/* ===== Summary block ===== */
+.result-summary-block {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.result-summary {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ===== Report sections ===== */
+.result-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.report-section {
+  padding: 1.2rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  animation: slideInLeft 0.5s var(--ease-out-expo) both;
+}
+
+.report-section-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.report-section-content {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+/* ===== Findings inside sections ===== */
+.section-findings {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.section-finding-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.finding-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  flex-shrink: 0;
+  margin-top: 0.45rem;
+}
+
+.finding-claim {
+  margin-bottom: 0.15rem;
+}
+
+.finding-confidence {
+  font-size: 0.72rem;
+  color: var(--accent-secondary);
+  font-weight: 500;
+}
+
+/* ===== Conclusion ===== */
+.result-conclusion {
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--glass-border);
+  margin-bottom: 1.2rem;
+}
+
+/* ===== Sources ===== */
+.result-sources {
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.sources-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.source-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+}
+
+.source-number {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(108, 92, 231, 0.12);
+  color: var(--accent-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.source-link {
+  color: var(--accent-secondary);
+  word-break: break-all;
+  transition: color var(--transition-fast);
+}
+
+.source-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .research-page {
+    padding-top: 4vh;
+  }
+
+  .research-card,
+  .result-card {
+    padding: 1.5rem;
+  }
+
+  .report-section {
+    padding: 1rem;
+  }
+
+  .top-bar {
+    padding: 0.75rem 1rem;
+  }
+}

@@ -1,0 +1,15 @@
+.floating-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent-secondary);
+  opacity: 0;
+  animation: particleFloat 8s ease-in-out infinite;
+}
